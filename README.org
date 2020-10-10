@@ -40,7 +40,7 @@ git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 
 The doom install command pulls in all of the default modules. This can take a few minutes to complete.
 
-It is also a good idea to add the *~/.emacs.d/bin* dir to your PATH. The following works on Mac. Change to ~~/.bashrc~ on Linux.
+It is also a good idea to add the *~/.emacs.d/bin* dir to your PATH. The following works on Mac. Change to *~/.bashrc* on Linux.
 #+BEGIN_SRC sh
 echo 'PATH="$HOME/.emacs.d/bin:$PATH"' >> ~/.bash_profile
 #+END_SRC
