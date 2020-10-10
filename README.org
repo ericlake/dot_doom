@@ -6,21 +6,23 @@
 * Table of Contents :TOC_3:noexport:
 - [[#description][Description]]
 - [[#prerequisites][Prerequisites]]
+  - [[#fedora-linux][Fedora Linux]]
+  - [[#mac][Mac]]
 - [[#doom-install][Doom Install]]
 - [[#custom-configs][Custom Configs]]
 
 * Description
-# Setup and use of my personal configuration of Doom Emacs
+Setup and use of my personal configuration of Doom Emacs
 
 * Prerequisites
 You will first need to have Emacs installed
 
-# Fedora Linux
+** Fedora Linux
 #+BEGIN_SRC
 dnf install emacs
 #+END_SRC
 
-# Mac
+** Mac
 #+BEGIN_SRC
 brew tap d12frosted/emacs-plus
 brew install emacs-plus --with-modern-icon
