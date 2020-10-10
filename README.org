@@ -31,7 +31,7 @@ ln -s /usr/local/opt/emacs-plus@27/Emacs.app /Applications
 #+END_SRC
 
 * Doom Install
-Once the prerequisites have been meet the doom emacs distro will need to be cloned into your ~/.emacs.d dir.
+Once the prerequisites have been meet the doom emacs distro will need to be cloned into your *~/.emacs.d* dir.
 
 #+BEGIN_SRC
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
@@ -40,17 +40,20 @@ git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 
 The doom install command pulls in all of the default modules. This can take a few minutes to complete.
 
-It is also a good idea to add the ~/.emacs.d/bin dir to your PATH.
+It is also a good idea to add the *~/.emacs.d/bin* dir to your PATH. The following works on Mac. Change to ~~/.bashrc~ on Linux.
+#+BEGIN_SRC sh
+echo 'PATH="$HOME/.emacs.d/bin:$PATH"' >> ~/.bash_profile
+#+END_SRC
 
 * Custom Configs
-Once this is done clone this repository to ~/.doom.d
+Once this is done clone this repository to *~/.doom.d*
 
-#+BEGIN_SRC
-git clone git@github.com:ericlake/dot_doom.git .doom.d
+#+BEGIN_SRC sh
+git clone git@github.com:ericlake/dot_doom.git ~/.doom.d
 #+END_SRC
 
 Now that you have the config dir synced you will want to run a ~doom sync~.
-#+BEGIN_SRC
+#+BEGIN_SRC sh
 doom sync
 #+END_SRC
 
