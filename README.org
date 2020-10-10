@@ -49,4 +49,9 @@ Once this is done clone this repository to ~/.doom.d
 git clone git@github.com:ericlake/dot_doom.git .doom.d
 #+END_SRC
 
+Now that you have the config dir synced you will want to run a ~doom sync~.
+#+BEGIN_SRC
+doom sync
+#+END_SRC
+
 You should now be ready to start up Emacs.
