@@ -1,0 +1,50 @@
+#+TITLE:   Doom Emacs Personal Configuration
+#+DATE:    October 10, 2020
+#+SINCE:   <replace with next tagged release version>
+#+STARTUP: inlineimages nofold
+
+* Table of Contents :TOC_3:noexport:
+- [[#description][Description]]
+- [[#prerequisites][Prerequisites]]
+- [[#doom-install][Doom Install]]
+- [[#custom-configs][Custom Configs]]
+
+* Description
+# Setup and use of my personal configuration of Doom Emacs
+
+* Prerequisites
+You will first need to have Emacs installed
+
+# Fedora Linux
+#+BEGIN_SRC
+dnf install emacs
+#+END_SRC
+
+# Mac
+#+BEGIN_SRC
+brew tap d12frosted/emacs-plus
+brew install emacs-plus --with-modern-icon
+brew install flymake autopep8 pylint multimarkdown
+ln -s /usr/local/opt/emacs-plus@27/Emacs.app /Applications
+#+END_SRC
+
+* Doom Install
+Once the prerequisites have been meet the doom emacs distro will need to be cloned into your ~/.emacs.d dir.
+
+#+BEGIN_SRC
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+#+END_SRC
+
+The doom install command pulls in all of the default modules. This can take a few minutes to complete.
+
+It is also a good idea to add the ~/.emacs.d/bin dir to your PATH.
+
+* Custom Configs
+Once this is done clone this repository to ~/.doom.d
+
+#+BEGIN_SRC
+git clone git@github.com:ericlake/dot_doom.git .doom.d
+#+END_SRC
+
+You should now be ready to start up Emacs.
