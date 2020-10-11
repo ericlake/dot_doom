@@ -46,26 +46,12 @@
       org-use-speed-commands t
       org-journal-dir "~/Dropbox/org/journals/"
       org-journal-file-format "%Y-%m.org"
-      ;; org-journal-date-format "%A, %d %B %Y"
       org-journal-file-type "weekly"
+      org-journal-date-format "%A, %d %B %Y"
       org-journal-start-on-weekday 0
-      org-log-done-with-time t
-      org-capture-templates '(("t" "Todo" entry (file+headline "~/Dropbox/org/todo.org" "Todo")
-                               "* TODO %? \n  %^t")
-                              ("i" "Idea" entry (file+headline "~/Dropbox/org/ideas.org" "Ideas")
-                               "* %? \n %U")
-                              ("l" "Learn" entry (file+headline "~/Dropbox/org/learn.org" "Learn")
-                               "* %? \n")
-                              ("w" "Work note" entry (file+headline "~/Dropbox/org/work.org" "Work")
-                               "* %? \n")
-                              ("m" "Check movie" entry (file+headline "~/Dropbox/org/check.org" "Movies")
-                               "* %? %^g")
-                              ("n" "Check book" entry (file+headline "~/Dropbox/org/check.org" "Books")
-                               "* %^{book name} by %^{author} %^g")
-                              ("T" "Check TV" entry (file+headline "~/Dropbox/org/check.org" "TV Shows")
-                               "* %^{TV show name} on %^{streaming platform} %^g"))
-      org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(p)" "VERIFY(v)" "BLOCKED(b)"
-                                    "|" "CANCELED(c)" "DONE(d)" "DELEGATED(D)")))
+      org-log-done-with-time t)
+      ;;org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(p)" "VERIFY(v)" "BLOCKED(b)"
+      ;;                              "|" "CANCELED(c)" "DONE(d)" "DELEGATED(D)")))
 
 (use-package! org-super-agenda
   :after org-agenda
@@ -73,43 +59,37 @@
   (setq org-agenda-skip-scheduled-if-done t
       org-agenda-skip-deadline-if-done t
       org-agenda-include-deadlines t
-      org-agenda-block-separator nil
-      org-agenda-compact-blocks nil
+      ;; org-agenda-block-separator nil
+      ;; org-agenda-compact-blocks nil
       org-agenda-start-day nil ;; i.e. today
-      org-agenda-span 10
+      ; org-agenda-span 10
       org-agenda-start-on-weekday nil)
-  (setq org-agenda-custom-commands
-        '(("c" "Super view"
-           ((agenda "" ((org-agenda-overriding-header "")
-                        (org-super-agenda-groups
-                         '((:name "Today"
-                                  :time-grid t
-                                  :date today
-                                  :order 1)))))
-            (alltodo "" ((org-agenda-overriding-header "")
-                         (org-super-agenda-groups
-                          '((:log t)
-                            (:name "To refile"
-                                   :file-path "refile\\.org")
-                            (:name "Next to do"
-                                   :todo "NEXT"
-                                   :order 1)
-                            (:name "Important"
-                                   :priority "A"
-                                   :order 6)
-                            (:name "Due Today"
-                                   :deadline today
-                                   :order 2)
-                            (:name "Scheduled Soon"
-                                   :scheduled future
-                                   :order 8)
-                            (:name "Overdue"
-                                   :deadline past
-                                   :order 7)
-                            (:name "Meetings"
-                                   :and (:todo "MEET" :scheduled future)
-                                   :order 10)
-                            (:discard (:not (:todo "TODO")))))))))))
+  (setq org-super-agenda-groups
+        '((:name "Today"
+           :time-grid t
+           :date today
+           :order 1)
+          (:name "To refile"
+           :file-path "refile\\.org")
+          (:name "Next to do"
+           :todo "NEXT"
+           :order 1)
+          (:name "Important"
+           :priority "A"
+           :order 6)
+          (:name "Due Today"
+           :deadline today
+           :order 2)
+          (:name "Scheduled Soon"
+           :scheduled future
+           :order 8)
+          (:name "Overdue"
+           :deadline past
+           :order 7)
+          (:name "Meetings"
+           :and (:todo "MEET" :scheduled future)
+           :order 10)
+          (:discard (:not (:todo "TODO")))))
   :config
   (org-super-agenda-mode))
 
