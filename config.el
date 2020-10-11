@@ -9,6 +9,9 @@
 (setq user-full-name "Eric Lake"
       user-mail-address "ericlake@gmail.com")
 
+;; Customize the splash screen image
+(setq fancy-splash-image (concat doom-private-dir "etank.png"))
+
 ;; Use the PATH set in bash profile
 (require 'exec-path-from-shell)
 (when (display-graphic-p)
@@ -40,15 +43,17 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Dropbox/org/"
-      org-log-done-with-time t
       org-use-speed-commands t
-      org-agenda-start-on-weekday 0
+      org-journal-dir "~/Dropbox/org/journals/"
+      org-journal-file-format "%Y-%m.org"
+      ;; org-journal-date-format "%A, %d %B %Y"
+      org-journal-file-type "weekly"
+      org-journal-start-on-weekday 0
+      org-log-done-with-time t
       org-capture-templates '(("t" "Todo" entry (file+headline "~/Dropbox/org/todo.org" "Todo")
                                "* TODO %? \n  %^t")
                               ("i" "Idea" entry (file+headline "~/Dropbox/org/ideas.org" "Ideas")
                                "* %? \n %U")
-                              ("b" "Birthdays" entry (file+headline "~/Dropbox/org/birthdays.org" "Birthdays")
-                               "* %? \n")
                               ("l" "Learn" entry (file+headline "~/Dropbox/org/learn.org" "Learn")
                                "* %? \n")
                               ("w" "Work note" entry (file+headline "~/Dropbox/org/work.org" "Work")
@@ -61,6 +66,59 @@
                                "* %^{TV show name} on %^{streaming platform} %^g"))
       org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(p)" "VERIFY(v)" "BLOCKED(b)"
                                     "|" "CANCELED(c)" "DONE(d)" "DELEGATED(D)")))
+
+(use-package! org-super-agenda
+  :after org-agenda
+  :init
+  (setq org-agenda-skip-scheduled-if-done t
+      org-agenda-skip-deadline-if-done t
+      org-agenda-include-deadlines t
+      org-agenda-block-separator nil
+      org-agenda-compact-blocks nil
+      org-agenda-start-day nil ;; i.e. today
+      org-agenda-span 10
+      org-agenda-start-on-weekday nil)
+  (setq org-agenda-custom-commands
+        '(("c" "Super view"
+           ((agenda "" ((org-agenda-overriding-header "")
+                        (org-super-agenda-groups
+                         '((:name "Today"
+                                  :time-grid t
+                                  :date today
+                                  :order 1)))))
+            (alltodo "" ((org-agenda-overriding-header "")
+                         (org-super-agenda-groups
+                          '((:log t)
+                            (:name "To refile"
+                                   :file-path "refile\\.org")
+                            (:name "Next to do"
+                                   :todo "NEXT"
+                                   :order 1)
+                            (:name "Important"
+                                   :priority "A"
+                                   :order 6)
+                            (:name "Due Today"
+                                   :deadline today
+                                   :order 2)
+                            (:name "Scheduled Soon"
+                                   :scheduled future
+                                   :order 8)
+                            (:name "Overdue"
+                                   :deadline past
+                                   :order 7)
+                            (:name "Meetings"
+                                   :and (:todo "MEET" :scheduled future)
+                                   :order 10)
+                            (:discard (:not (:todo "TODO")))))))))))
+  :config
+  (org-super-agenda-mode))
+
+(map! :leader
+      (:prefix ("j" . "journal") ;; org-journal bindings
+        :desc "Create new journal entry" "j" #'org-journal-new-entry
+        :desc "Open previous entry" "p" #'org-journal-open-previous-entry
+        :desc "Open next entry" "n" #'org-journal-open-next-entry
+        :desc "Search journal" "s" #'org-journal-search-forever))
 
 ;; Python bits
 (setq python-shell-completion-native-enable nil
