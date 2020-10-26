@@ -11,6 +11,8 @@
 ;; Customize the splash screen image
 (setq fancy-splash-image (concat doom-private-dir "etank.png"))
 
+(setq doom-modeline-major-mode-color-icon t)
+
 (defun display-workspaces-in-minibuffer ()
   (with-current-buffer " *Minibuf-0*"
     (erase-buffer)
