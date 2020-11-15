@@ -8,6 +8,8 @@
 (setq user-full-name "Eric Lake"
       user-mail-address "ericlake@gmail.com")
 
+(setq epg-gpg-program "gpg2")
+
 ;; Customize the splash screen image
 (setq fancy-splash-image (concat doom-private-dir "etank.png"))
 

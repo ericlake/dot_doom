@@ -8,7 +8,8 @@
         org-enforce-todo-dependencies t
         org-habit-show-habits t
         org-log-done-with-time t
-        org-use-speed-commands t))
+        org-use-speed-commands t
+        org-ellipsis " ▾"))
 
 (custom-declare-face '+org-todo-active  '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
 (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
@@ -69,10 +70,12 @@
           :kill-buffer t))))
 
 (setq org-journal-dir "~/Dropbox/org/journals/"
-      org-journal-file-format "%Y-%m.org"
+      org-journal-file-format "%Y-%m.org.gpg"
       org-journal-file-type "weekly"
       org-journal-date-format "%A, %d %B %Y"
-      org-journal-start-on-weekday 0)
+      org-journal-start-on-weekday 0
+      org-journal-enable-encryption t
+      org-journal-encrypt-journal t)
 
 (setq org-roam-directory "~/Dropbox/org/roam")
 
