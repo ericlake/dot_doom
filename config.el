@@ -8,6 +8,9 @@
 (setq user-full-name "Eric Lake"
       user-mail-address "ericlake@gmail.com")
 
+(setq auth-sources
+    '((:source "~/.doom.d/secrets/.authinfo.gpg")))
+
 (setq epg-gpg-program "gpg2")
 
 ;; Customize the splash screen image
