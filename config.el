@@ -5,11 +5,48 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "Eric Lake"
-      user-mail-address "ericlake@gmail.com")
+(setq user-full-name "Eric Lake")
 
 (setq auth-sources
-    '((:source "~/.doom.d/secrets/.authinfo.gpg")))
+      '((:source "~/.doom.d/secrets/.authinfo.gpg"))
+      send-mail-function 'smtpmail-send-it
+      message-send-mail-function 'smtpmail-send-it
+      smtpmail-starttls-credentials
+      '(("smtp.gmail.com" 587 nil nil))
+      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587
+      smtpmail-debug-info t
+      )
+
+(after! mu4e
+  (setq mu4e-context-policy "ask"
+        mu4e-update-interval (* 10 60)
+        mu4e-get-mail-command "mbsync -a"))
+
+;; Personl email
+;; Each path is relative to `+mu4e-mu4e-mail-path', which is ~/.mail by default
+(set-email-account! "personal"
+  '((mu4e-sent-folder       . "/personal/[Gmail]/Sent Mail")
+    (mu4e-drafts-folder     . "/personal/[Gmail]/Drafts")
+    (mu4e-trash-folder      . "/personal/[Gmail]/Trash")
+    (mu4e-refile-folder     . "/personal/[Gmail]/All Mail")
+    (smtpmail-smtp-user     . "ericlake@gmail.com")
+    (user-mail-address      . "ericlake@gmail.com")    ;; only needed for mu < 1.4
+    (mu4e-compose-signature . "\nRegards,\n\nEric Lake"))
+  t)
+
+;; Work email
+;; Each path is relative to `+mu4e-mu4e-mail-path', which is ~/.mail by default
+(set-email-account! "logdna"
+  '((mu4e-sent-folder       . "/logdna/[Gmail]/Sent Mail")
+    (mu4e-drafts-folder     . "/logdna/[Gmail]/Drafts")
+    (mu4e-trash-folder      . "/logdna/[Gmail]/Trash")
+    (mu4e-refile-folder     . "/logdna/[Gmail]/All Mail")
+    (smtpmail-smtp-user     . "eric.lake@logdna.com")
+    (user-mail-address      . "eric.lake@logdna.com")    ;; only needed for mu < 1.4
+    (mu4e-compose-signature . "\nRegards,\n\nEric Lake"))
+  t)
 
 (setq epg-gpg-program "gpg2")
 
@@ -18,6 +55,13 @@
 
 (setq doom-modeline-major-mode-icon t
       doom-modeline-major-mode-color-icon t)
+
+(set-fringe-mode 10)        ; Give some breathing room
+
+(after! doom-modeline
+  (doom-modeline-def-modeline 'main
+    '(bar matches buffer-info remote-host buffer-position parrot selection-info)
+    '(misc-info minor-modes input-method buffer-encoding major-mode process vcs checker "  "))) ; <-- added padding here
 
 (defun display-workspaces-in-minibuffer ()
   (with-current-buffer " *Minibuf-0*"
@@ -70,8 +114,8 @@
 
 ;; Configure elfeed. This will use the elfeed.org file to configure feeds.
 (after! elfeed
-  (setq elfeed-search-filter "@1-month-ago +unread"))
-(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+  (setq elfeed-search-filter "@1-month-ago +unread")
+  (add-hook! 'elfeed-search-mode-hook 'elfeed-update))
 
 (map! :leader
       (:prefix-map ("a" . "applications")
@@ -90,6 +134,12 @@
 
 ;; Load the customized org-mode settings
 (load! "org-config.el")
+
+;;(use-package! edwina
+;;  :config
+;;  (setq display-buffer-base-action '(display-buffer-below-selected))
+;;  (edwina-setup-dwm-keys)
+;;  (edwina-mode 1))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

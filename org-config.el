@@ -70,9 +70,8 @@
           :kill-buffer t))))
 
 (setq org-journal-dir "~/Dropbox/org/journals/"
-      org-journal-file-format "%Y-%m.org.gpg"
-      org-journal-file-type "weekly"
-      org-journal-date-format "%A, %d %B %Y"
+      org-journal-file-format "%Y.org"
+      org-journal-file-type "yearly"
       org-journal-start-on-weekday 0
       org-journal-enable-encryption t
       org-journal-encrypt-journal t)
