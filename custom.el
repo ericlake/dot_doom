@@ -4,6 +4,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages '(vscode-dark-plus-theme))
+ '(safe-local-variable-values
+   '((org-roam-db-location . "./org-roam.db")
+     (org-roam-directory . ".")))
  '(smtpmail-smtp-server "smtp.gmail.com")
  '(smtpmail-smtp-service 25))
 (custom-set-faces

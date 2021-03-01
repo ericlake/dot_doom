@@ -76,7 +76,7 @@
       org-journal-enable-encryption t
       org-journal-encrypt-journal t)
 
-(setq org-roam-directory "~/Dropbox/org/roam")
+;; (setq org-roam-directory "~/Dropbox/org/roam")
 
 ;; Let deft search files under root org directory.
 ;; We could use the org-directory variable instead of duplicating values

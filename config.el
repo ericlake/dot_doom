@@ -19,11 +19,6 @@
       smtpmail-debug-info t
       )
 
-(after! mu4e
-  (setq mu4e-context-policy "ask"
-        mu4e-update-interval (* 10 60)
-        mu4e-get-mail-command "mbsync -a"))
-
 ;; Personl email
 ;; Each path is relative to `+mu4e-mu4e-mail-path', which is ~/.mail by default
 (set-email-account! "personal"
@@ -47,6 +42,11 @@
     (user-mail-address      . "eric.lake@logdna.com")    ;; only needed for mu < 1.4
     (mu4e-compose-signature . "\nRegards,\n\nEric Lake"))
   t)
+
+(after! mu4e
+  (setq mu4e-context-policy "ask"
+        mu4e-update-interval (* 10 60)
+        mu4e-get-mail-command "mbsync -a"))
 
 (setq epg-gpg-program "gpg2")
 
@@ -134,6 +134,16 @@
 
 ;; Load the customized org-mode settings
 (load! "org-config.el")
+
+(use-package! ansible-vault)
+
+(add-to-list 'auto-mode-alist '(".yaml.vault$" . yaml-mode))
+
+(defun ansible-vault-mode-maybe ()
+    (when (ansible-vault--is-vault-file)
+      (ansible-vault-mode 1)))
+
+(add-hook 'yaml-mode-hook 'ansible-vault-mode-maybe)
 
 ;;(use-package! edwina
 ;;  :config

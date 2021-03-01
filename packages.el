@@ -52,3 +52,4 @@
 (package! vscode-dark-plus-theme)
 (package! exec-path-from-shell)
 (package! org-super-agenda)
+(package! ansible-vault)
